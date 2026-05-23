@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoraScan</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #eef8f0, #f7fbf8);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Aksen Bulatan */
+        .circle-top-1 {
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            background: #2e7d32;
+            border-radius: 50%;
+            top: -90px;
+            left: -40px;
+            opacity: 0.18;
+        }
+
+        .circle-top-2 {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: #43a047;
+            border-radius: 50%;
+            top: -40px;
+            left: 40px;
+            opacity: 0.15;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card-main {
+            width: 100%;
+            max-width: 430px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 32px;
+            padding: 45px 30px;
+            box-shadow:
+                0 10px 35px rgba(34, 139, 34, 0.08),
+                0 4px 15px rgba(0, 0, 0, 0.04);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-img {
+            width: 120px;
+            margin-bottom: 12px;
+        }
+
+        .logo-title {
+            font-size: 34px;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 5px;
+        }
+
+        .logo-subtitle {
+            color: #5f7161;
+            font-size: 15px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .custom-upload {
+            display: inline-block;
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            color: white;
+            padding: 12px 22px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+        }
+
+        .custom-upload:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+            transform: translateY(-2px);
+        }
+
+        .file-text {
+            margin-top: 14px;
+            color: #5f7161;
+            font-size: 14px;
+        }
+
+        .upload-box {
+            border: 2px dashed #81c784;
+            border-radius: 22px;
+            padding: 28px 24px 24px;
+        }
+
+        .secondary-action {
+            margin-top: 18px;
+        }
+
+        .upload-box:hover {
+            border-color: #2e7d32;
+            background: #f1fff3;
+        }
+
+        .form-control {
+            border-radius: 14px;
+            padding: 12px;
+            border: 1px solid #c8e6c9;
+        }
+
+        .form-control:focus {
+            border-color: #43a047;
+            box-shadow: 0 0 0 0.15rem rgba(67, 160, 71, 0.2);
+        }
+
+        .btn-main {
+            width: 100%;
+            border: none;
+            border-radius: 18px;
+            padding: 14px;
+            font-size: 17px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-detect {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.25);
+        }
+
+        .btn-detect:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+            transform: translateY(-2px);
+        }
+
+        .btn-history {
+            background: #edf7ee;
+            color: #2e7d32;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            border: 1px solid #c8e6c9;
+        }
+
+        .btn-history:hover {
+            background: #dff2e2;
+            color: #1b5e20;
+            transform: translateY(-2px);
+        }
+
+        .btn-main:disabled {
+            background: #b7d7bb;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-top: 20px;
+            display: none;
+            border: 3px solid #e8f5e9;
+        }
+
+        .btn-live {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(27, 94, 32, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-live:hover {
+            background: linear-gradient(135deg, #14461a, #1b5e20);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media(max-width: 576px) {
+
+            .card-main {
+                padding: 35px 22px;
+                border-radius: 28px;
+            }
+
+            .logo-img {
+                width: 105px;
+            }
+
+            .logo-title {
+                font-size: 28px;
+            }
+
+            .logo-subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Aksen -->
+    <div class="circle-top-1"></div>
+    <div class="circle-top-2"></div>
+
+    <div class="main-wrapper">
+
+        <div class="card-main text-center">
+
+            <!-- Logo -->
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo-img">
+
+            <h1 class="logo-title">PoraScan</h1>
+
+            <p class="logo-subtitle">
+                Sistem Deteksi Penyakit Daun Porang
+            </p>
+
+            <!-- Form -->
+            <form action="/detect" method="POST" enctype="multipart/form-data">
+
+                <div class="upload-box">
+
+                    <input type="file" name="image" id="imageInput" accept="image/*" hidden>
+
+                    <label for="imageInput" class="custom-upload">
+
+                        Pilih Gambar
+
+                    </label>
+
+                    <p id="fileName" class="file-text">
+                        Belum ada file dipilih
+                    </p>
+
+                    <img id="preview" class="preview-image">
+
+                    <button type="submit" id="detectBtn" class="btn-main btn-detect mt-4" disabled>
+
+                        Deteksi
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <a href="/live" class="btn-main btn-live secondary-action">
+                Deteksi Realtime
+            </a>
+
+            <a href="/history" class="btn-main btn-history mt-3">
+                Histori
+            </a>
+
+        </div>
+
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const detectBtn = document.getElementById('detectBtn');
+        const preview = document.getElementById('preview');
+        const fileName = document.getElementById('fileName');
+
+        imageInput.addEventListener('change', function () {
+
+            const file = this.files[0];
+
+            if (file) {
+
+                detectBtn.disabled = false;
+
+                fileName.innerText = file.name;
+
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+
+                }
+
+                reader.readAsDataURL(file);
+
+            } else {
+
+                detectBtn.disabled = true;
+
+                fileName.innerText = "Belum ada file dipilih";
+
+                preview.style.display = "none";
+
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
